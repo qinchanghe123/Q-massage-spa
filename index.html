@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEMSTONE SPA - Philadelphia</title>
+    <meta name="description" content="Best Massage and Spa in Philadelphia. Relax and unwind at GEMSTONE SPA.">
+    <style>
+        /* --- CSS Reset & Variables --- */
+        :root {
+            --primary-color: #00b894;
+            --gold-color: #d4af37;
+            --bg-dark: #101514;
+            --bg-card: #1b2422;
+            --text-light: #f0f0f0;
+            --text-gray: #aaaaaa;
+            --success: #4caf50;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- Utilities --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--gold-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-color);
+            margin: 10px auto 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, var(--primary-color), #00856b);
+            color: white;
+            border-radius: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0, 184, 148, 0.35);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 184, 148, 0.55);
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: rgba(16, 21, 20, 0.95);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #2a3633;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold-color);
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: var(--text-light);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 60vh;
+            background: radial-gradient(circle at center, #24322f 0%, #101514 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            border-bottom: 1px solid #2a3633;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--gold-color);
+            text-shadow: 0px 0px 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #ddd;
+        }
+
+        /* --- Introduction Sections --- */
+        .intro-section {
+            padding: 60px 0;
+            background-color: #151d1b;
+            border-bottom: 1px solid #22302d;
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: flex-start;
+        }
+
+        .intro-text h2 {
+            font-size: 2rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 15px;
+        }
+        
+        .intro-text p {
+            color: var(--text-gray);
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+            text-align: justify;
+        }
+
+        .why-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        .why-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            text-align: justify;
+        }
+
+        .why-list li::before {
+            content: '💎';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--primary-color);
+            font-size: 1rem;
+        }
+
+        .features-grid {
+            display: none;
+        }
+
+        /* --- Girls/Staff Section: Waterfall Layout --- */
+        .staff-section {
+            padding: 80px 0;
+            background-color: var(--bg-dark);
+        }
+
+        .staff-masonry {
+            column-count: 3;
+            column-gap: 24px;
+        }
+
+        .masonry-item {
+            display: inline-block;
+            width: 100%;
+            margin: 0 0 24px;
+            background-color: var(--bg-card);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #2c3c38;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            break-inside: avoid;
+            -webkit-column-break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .masonry-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 36px rgba(0,0,0,0.45);
+        }
+
+        .masonry-item img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            background-color: #333;
+        }
+
+        .emoji-divider {
+            text-align: center;
+            font-size: 1.5rem;
+            margin: 20px 0;
+            opacity: 0.7;
+        }
+
+        /* --- Info & Payments --- */
+        .info-section {
+            padding: 80px 0;
+            background: var(--bg-dark);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .info-box {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            height: 100%;
+        }
+
+        .info-item {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .info-icon {
+            font-size: 1.2rem;
+            color: var(--gold-color);
+            margin-top: 3px;
+        }
+
+        .payment-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .pay-badge {
+            background: #263330;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            border: 1px solid #344843;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .map-container {
+            width: 100%;
+            height: 250px;
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #2c3c38;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: #000;
+            padding: 30px 0;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #222;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 992px) {
+            .staff-masonry {
+                column-count: 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .intro-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .staff-masonry {
+                column-count: 1;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-flex">
+            <div class="logo">GEMSTONE SPA</div>
+            <nav class="nav-links">
+                <a href="#about">About</a>
+                <a href="#staff">Girls</a>
+                <a href="#info">Contact</a>
+                <a href="tel:+12673078655" style="color:var(--primary-color);">(267) 307-8655</a>
+            </nav>
+            <div class="mobile-menu-btn" onclick="alert('Please scroll down for info')">☰</div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Relax & Rejuvenate</h1>
+            <p>6650 Frankford Ave, Philadelphia, PA 19135</p>
+            <div style="margin-bottom: 20px; font-weight: bold; color: var(--gold-color);">
+                OPEN: 10:00 AM - 2:00 AM
+            </div>
+            <a href="tel:+12673078655" class="btn">Call (267) 307-8655</a>
+        </div>
+    </section>
+
+    <!-- Who We Are & Why Choose Us -->
+    <section id="about" class="intro-section">
+        <div class="container">
+            <div class="intro-grid">
+                <div class="intro-text">
+                    <h2>Who We Are</h2>
+                    <p>
+                        <strong>GEMSTONE SPA</strong> Is An All-In-One "Asian Fusion Men's Super Club" With Specialty On Elite Companionship & Nuru Massage & Men's SPA. We Have At Least 9 Professional Angels At Single Place Lineup For You To Choose From.
+                    </p>
+                    <p>
+                        All Strictly Selected Beauty Pros Are Rotated By Shift Every Week, They Come From Different Countries All Over The World - "Asian" + "European" + "Latino" + "American Domestic" + "Mix Blood"! We're Committed To Develop The Best Companionship & Nuru Massage Techniques & Men's Prostate Health Spa Skills. We're Dedicated To Interpret The Best Fusion Culture Into The Fabulous Way!
+                    </p>
+                </div>
+
+                <div>
+                    <h2 style="font-size: 1.5rem; color: #fff; margin-bottom: 20px; text-align: center;">Why Choose Us</h2>
+                    
+                    <p style="margin-bottom: 15px; color: #fff; font-style: italic; text-align: center; border-bottom: 1px solid #333; padding-bottom: 10px;">
+                        Dedication Of Samurai Spirit ( Bushido Culture ) Coming Along With "GEMSTONE SPA" As Always! This Is The Highest State Of Service In The World! No Others Can Be Mentioned In The Same Breath!
+                    </p>
+
+                    <ul class="why-list">
+                        <li>
+                            At Here, You’ll Get The Most Choices Of High-End & Up-Scale Talented Angels, Which You’ll Never Be Able To Get So Many Great Choices Of Hotties From Other Regular Places In Philadelphia!
+                        </li>
+                        <li>
+                            We Change New Angels Very Frequently! That Means All GEMSTONE SPA Angels Will Be Replaced With Brand New Ones In Just Few Days! You Will Get The Freshest And Newest Ones For Sure!
+                        </li>
+                        <li>
+                            At Here, We Prepare Five Race Groups Of The Selected Angels! Not Boring Any More! The Taste Is Being Diversified! We Offer “Asian Group”; “Hispanic Group”; “European Group”; “American Domestic Group”; "Mix Blood Group".
+                        </li>
+                        <li>
+                            Our Place Is The Only One “Fictitious Land Of Peace” In Philadelphia! No Bothering! No Interference! No Hurry! No Concern! Feel like Timeless & Spaceless! All You Need To Do Is ENJOY!
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Staff Section / Only Image Waterfall -->
+    <section id="staff" class="staff-section">
+        <div class="container">
+            <h2 class="section-title">Our Ladies</h2>
+
+            <div class="staff-masonry">
+                <div class="masonry-item">
+                    <img src="1.jpg" alt="Our Ladies 1" onerror="this.src='https://via.placeholder.com/400x600/333/fff?text=1.jpg+Missing'">
+                </div>
+
+                <div class="masonry-item">
+                    <img src="2.jpg" alt="Our Ladies 2" onerror="this.src='https://via.placeholder.com/400x600/333/fff?text=2.jpg+Missing'">
+                </div>
+
+                <div class="masonry-item">
+                    <img src="3.jpg" alt="Our Ladies 3" onerror="this.src='https://via.placeholder.com/400x600/333/fff?text=3.jpg+Missing'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Section with MAP -->
+    <section id="info" class="info-section">
+        <div class="container">
+            <div class="info-grid">
+                
+                <div class="info-box">
+                    <h3 style="color:white; margin-bottom:20px;">Visit Us</h3>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div>
+                            <strong>Address:</strong><br>
+                            6650 Frankford Ave,<br>Philadelphia, PA 19135
+                        </div>
+                    </div>
+
+                    <div class="map-container">
+                        <iframe 
+                            src="https://maps.google.com/maps?q=6650+Frankford+Ave,+Philadelphia,+PA+19135&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <div class="info-item" style="margin-top: 20px;">
+                        <div class="info-icon">📞</div>
+                        <div>
+                            <strong>Phone:</strong><br>
+                            <a href="tel:+12673078655" style="color:var(--primary-color); font-weight:bold; font-size:1.2rem;">(267) 307-8655</a>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">🕒</div>
+                        <div>
+                            <strong>Business Hours:</strong><br>
+                            10:00 AM - 2:00 AM Daily
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h3 style="color:white; margin-bottom:20px;">We Accept</h3>
+                    <div class="payment-methods">
+                        <div class="pay-badge">💵 Cash</div>
+                        <div class="pay-badge">📱 Zelle</div>
+                        <div class="pay-badge">💸 Cash App</div>
+                        <div class="pay-badge">🍏 Apple Pay</div>
+                        <div class="pay-badge">💳 Credit Card</div>
+                    </div>
+                    <p style="margin-top: 20px; font-size: 0.9rem; color: #888;">
+                        Secure and discreet payments available.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 GEMSTONE SPA Philadelphia. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
